@@ -292,6 +292,12 @@ public class FieldExpression extends DataExpression {
             }
             if ((descriptor != null) && descriptor.hasTablePerClassPolicy()) {
                 field = field.clone();
+                DatabaseTable table = descriptor.getDefaultTable();
+                if((field.getTableName().length() != 0) && descriptor.getTableNames().contains(field.getTableName())) {
+                    table = descriptor.getTable(field.getTableName());
+                }
+                field.setTable(table);
+
                 field.setTable(descriptor.getDefaultTable());
             }
         }
@@ -329,6 +335,12 @@ public class FieldExpression extends DataExpression {
             }
             if ((descriptor != null) && descriptor.hasTablePerClassPolicy()) {
                 field = field.clone();
+                DatabaseTable table = descriptor.getDefaultTable();
+                if((field.getTableName().length() != 0) && descriptor.getTableNames().contains(field.getTableName())) {
+                    table = descriptor.getTable(field.getTableName());
+                }
+                field.setTable(table);
+
                 field.setTable(descriptor.getDefaultTable());
             }
         }
@@ -422,3 +434,4 @@ public class FieldExpression extends DataExpression {
         }
     }
 }
+
